@@ -24,6 +24,7 @@ var app = express();
 app.set('views', './views');
 app.set('view engine', 'jade');
 app.use(express.static('./public'));
+app.use(favicon('./public/assets/favicon.png'));
 app.use(expressSession({ secret: sessionSecret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());

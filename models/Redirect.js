@@ -7,7 +7,7 @@ var createResponseObject = function(key, url, clicks) {
     url: url,
     clicks: clicks
   };
-}
+};
 
 var redisResponseToObject = function(key, a, b) {
   resultUrl = a[1];
@@ -20,7 +20,7 @@ var redisResponseToObject = function(key, a, b) {
 
 var baseKey = function(key, prefix) {
   return key.substring(prefix.length);
-}
+};
 
 module.exports = function(redis) {
   var Redirect = {};
@@ -33,7 +33,7 @@ module.exports = function(redis) {
     redis.exec(function(err, result) {
       if (err)
         return callback(err);
-      callback(false, redisResponseToObject(key, result[0], result[1]))
+      callback(false, redisResponseToObject(key, result[0], result[1]));
     });
   };
 
@@ -76,11 +76,10 @@ module.exports = function(redis) {
           return;
         }
         var resultArray = [];
-        var i = 0;
         for (var i = 0; i < keys.length; i++) {
           var key = baseKey(keys[i], urlKeyPrefix);
-          resultArray.push(redisResponseToObject(key, results[2*i], results[2*i+1]))
-        };
+          resultArray.push(redisResponseToObject(key, results[2*i], results[2*i+1]));
+        }
         callback(false, resultArray);
       });
     });
