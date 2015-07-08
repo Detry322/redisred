@@ -1,11 +1,13 @@
 {
   "name": "redisred",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "A small Redis-based URL Redirector",
   "private": true,
   "scripts": {
-    "start": "node app.js",
-    "config": "cp .env.config .env"
+    "start-redis": "redis-server > /dev/null & echo $! > redis.pid",
+    "stop-redis": "kill -TERM $(cat redis.pid) && rm redis.pid",
+    "create-config": "cp .env.config .env",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "dotenv": "^1.2.0",
     "express": "^4.13.1",
     "express-session": "^1.11.3",
+    "hiredis": "^0.4.0",
     "ioredis": "^1.5.11",
     "jade": "^1.11.0",
     "morgan": "^1.6.1",

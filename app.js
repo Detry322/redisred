@@ -6,6 +6,7 @@ var redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379/0';
 var sessionSecret = process.env.SESSION_SECRET || 'this is really secure';
 var adminUsername = process.env.ADMIN_USERNAME || 'admin';
 var adminPassword = process.env.ADMIN_PASSWORD || '123456';
+var rootRedirect = process.env.ROOT_REDIRECT || 'https://google.com';
 
 //Includes
 var authentication = require('./authentication');
@@ -31,13 +32,13 @@ app.use(passport.session());
 var redis = new Redis(redisUrl);
 
 //Initialize controllers
-var adminController = require('./controllers/admin-controller')(redis);
-var redirectController = require('./controllers/redirect-controller')(redis);
+var adminController = require('./controllers/AdminController')(redis);
+var redirectController = require('./controllers/RedirectController')(redis);
 
 //Initialize routes
 var admin = require('./routes/admin.js')(passport, adminController);
 app.use('/admin', admin);
-var main = require('./routes/main.js')(redirectController);
+var main = require('./routes/main.js')(rootRedirect, redirectController);
 app.use('/', main);
 app.use(function(req, res, next) {
   res.status(404).render('404');
