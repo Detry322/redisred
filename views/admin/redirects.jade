@@ -11,9 +11,10 @@ html
           th.col-sm-2 Key
           th.col-sm-7 URL
           th.col-sm-3(colspan=3) Clicks
-        tr
-          each redirect in redirects
-            td.col-sm-2= redirect.key
+        each redirect in redirects
+          tr
+            td.col-sm-2
+              a(href=("/"+redirect.key))=redirect.key
             td.col-sm-7
               a(href=redirect.url)= redirect.url
             td.col-sm-1= redirect.clicks

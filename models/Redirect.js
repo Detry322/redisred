@@ -46,7 +46,7 @@ module.exports = function(redis) {
         callback(err);
         return;
       }
-      callback(false, createResponseObject(key, resultUrl, resultClicks));
+      callback(false, createResponseObject(key, url, 0));
     });
   };
 
