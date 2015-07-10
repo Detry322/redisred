@@ -10,11 +10,13 @@ module.exports = function(passport, adminUsername, adminPassword) {
     done(null, username);
   });
 
-  passport.use(new LocalStrategy(
-    function(username, password, done) {
+  passport.use(new LocalStrategy({
+      usernameField: 'username',
+      passwordField: 'password',
+    }, function(username, password, done) {
       if (adminUsername == username && adminPassword == password)
         done(null, username);
-      else
+      else 
         done(null, false, { message: "Incorrect Username or Password"} );
     }
   ));

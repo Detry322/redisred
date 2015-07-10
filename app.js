@@ -12,6 +12,7 @@ var rootRedirect = process.env.ROOT_REDIRECT || 'https://google.com';
 var authentication = require('./authentication');
 var express = require('express');
 var expressSession = require('express-session');
+var bodyParser = require('body-parser');
 var Redis = require('ioredis');
 var passport = require('passport');
 var favicon = require('serve-favicon');
@@ -23,8 +24,8 @@ authentication(passport, adminUsername, adminPassword);
 var app = express();
 app.set('views', './views');
 app.set('view engine', 'jade');
-app.use(express.static('./public'));
 app.use(favicon('./public/assets/favicon.png'));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressSession({ secret: sessionSecret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -46,5 +47,9 @@ app.use(function(req, res, next) {
 });
 
 // Start the server
-app.listen(port);
-console.log('App listening on port ' + port);
+console.log('Connecting to redis...');
+redis.ping(function(){
+  console.log('Connection successful. Server listening on port ' + port);
+  app.listen(port);
+});
+

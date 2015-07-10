@@ -11,12 +11,15 @@ module.exports = function(passport, adminController) {
   var router = express.Router();
 
   router.get('/', function(req, res) {
-    res.render('admin/root');
+    if (req.isAuthenticated())
+      res.redirect('/admin/redirects');
+    else
+      res.render('admin/root');
   });
 
-  router.get('/login', passport.authenticate('local',{
+  router.post('/login', passport.authenticate('local', {
     successRedirect: '/admin/redirects',
-    failureRedirect: '/admin'
+    failureRedirect: '/admin#incorrect'
   }));
 
   router.get('/logout', function(req, res) {
@@ -28,6 +31,10 @@ module.exports = function(passport, adminController) {
   router.get('/redirects', isAuthenticated, adminController.getAllRedirects);
   router.post('/redirect/create', isAuthenticated, adminController.createRedirect);
   router.post('/redirect/delete', isAuthenticated, adminController.deleteRedirect);
+
+  router.get('*',function(req, res) {
+    res.redirect('/admin');
+  });
 
   return router;
 };

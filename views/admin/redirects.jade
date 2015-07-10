@@ -1,0 +1,33 @@
+html
+  head
+    title redisred admin
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+    script(src="/public/js/admin/redirects.js")
+  body
+    div.container(style="max-width: 1000px;")
+      h1 redisred admin
+      table.table.table-striped
+        tr
+          th.col-sm-2 Key
+          th.col-sm-7 URL
+          th.col-sm-3(colspan=3) Clicks
+        tr
+          each redirect in redirects
+            td.col-sm-2= redirect.key
+            td.col-sm-7
+              a(href=redirect.url)= redirect.url
+            td.col-sm-1= redirect.clicks
+            form(action="/admin/redirect/delete", method="POST")
+              td.col-sm-2
+                input(type="hidden", name="redirect_key", value=redirect.key)
+                button.btn.btn-default.btn-block.remove-button Remove
+        tr
+          form(action="/admin/redirect/create", method="POST")
+            td.col-sm-2
+              input.form-control(name="redirect_key", placeholder="Redirect Name")
+            td.col-sm-7
+              input.form-control(name="redirect_url", placeholder="Redirect URL")
+            td.col-sm-1 N/A
+            td.col-sm-2(colspan=2)
+              button.btn.btn-danger.btn-block Create / Update
+      a.btn.btn-default.btn-block(href="/admin/logout") Log out

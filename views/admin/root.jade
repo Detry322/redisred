@@ -1,5 +1,19 @@
-h1 Welcome to admin root
-
-form(action="login", method="POST")
-  input(name="username", placeholder="Username")
-  input(name="password", type="password", placeholder="password")
+html
+  head
+    title redisred admin
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+  body
+    div.container(style="margin-top: 10%; max-width: 500px;")
+      h1(style="text-align: center; font-size: 4em;") redisred admin
+      div.content
+        form(action="/admin/login", method="POST")
+          div.form-group
+            label(for="username") Username
+            input.form-control(id="username", name="username", placeholder="Username")
+          div.form-group
+            label(for="password") Password
+            input.form-control(id="password", name="password", type="password", placeholder="Password")
+          button.btn.btn-danger.btn-block Log in
+          #alert.alert.alert-danger(style="margin-top: 10px; display: none;") Wrong username or password.
+          script if (window.location.hash.length) document.getElementById("alert").style.display = "block";
+          
