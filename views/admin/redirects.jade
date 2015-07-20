@@ -15,7 +15,7 @@ html
           tr
             td.col-sm-2
               a(href=("/"+redirect.key))=redirect.key
-            td.col-sm-7(style="overflow: hidden; text-overflow: ellipsis;")
+            td.col-sm-7(style="overflow: hidden; text-overflow: ellipsis; word-break: keep-all;")
               a(href=redirect.url)= redirect.url
             td.col-sm-1= redirect.clicks
             form(action="/admin/redirect/delete", method="POST")

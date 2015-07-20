@@ -9,7 +9,9 @@ module.exports = function(redis) {
         res.status(500).send(err);
       else {
         redirects.sort(function(a,b){
-          return a.key.toLowerCase() > b.key.toLowerCase();
+          var a_key = a.key.toLowerCase();
+          var b_key = b.key.toLowerCase();
+          return a_key.localeCompare(b_key);
         });
         res.status(200).render('admin/redirects', { redirects: redirects, token: req.csrfToken() });
       }
