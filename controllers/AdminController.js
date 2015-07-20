@@ -7,8 +7,12 @@ module.exports = function(redis) {
     Redirect.getAll(function(err, redirects) {
       if (err)
         res.status(500).send(err);
-      else
-        res.status(200).render('admin/redirects', { redirects: redirects });
+      else {
+        var sortedRedirects = redirects.sort(function(a,b){
+          return a.key > b.key;
+        });
+        res.status(200).render('admin/redirects', { redirects: sortedRedirects });
+      }
     });
   };
 
