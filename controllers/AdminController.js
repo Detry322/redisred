@@ -8,10 +8,10 @@ module.exports = function(redis) {
       if (err)
         res.status(500).send(err);
       else {
-        var sortedRedirects = redirects.sort(function(a,b){
+        redirects.sort(function(a,b){
           return a.key.toLowerCase() > b.key.toLowerCase();
         });
-        res.status(200).render('admin/redirects', { redirects: sortedRedirects, token: req.csrfToken() });
+        res.status(200).render('admin/redirects', { redirects: redirects, token: req.csrfToken() });
       }
     });
   };
