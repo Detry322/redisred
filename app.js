@@ -16,6 +16,7 @@ var bodyParser = require('body-parser');
 var Redis = require('ioredis');
 var passport = require('passport');
 var favicon = require('serve-favicon');
+var csrf = require('csurf');
 
 //Initialize auth
 authentication(passport, adminUsername, adminPassword);
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressSession({ secret: sessionSecret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(csrf());
 
 //Connect to Redis
 var redis = new Redis(redisUrl);

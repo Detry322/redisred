@@ -6,7 +6,7 @@ html
   body
     div.container(style="max-width: 1000px;")
       h1 redisred admin
-      table.table.table-striped
+      table.table.table-striped(style="table-layout: fixed;")
         tr
           th.col-sm-2 Key
           th.col-sm-7 URL
@@ -15,15 +15,17 @@ html
           tr
             td.col-sm-2
               a(href=("/"+redirect.key))=redirect.key
-            td.col-sm-7
+            td.col-sm-7(style="overflow: hidden; text-overflow: ellipsis;")
               a(href=redirect.url)= redirect.url
             td.col-sm-1= redirect.clicks
             form(action="/admin/redirect/delete", method="POST")
-              td.col-sm-2
+              td.col-sm-2(colspan=2)
+                input(type="hidden", name="_csrf", value=token)
                 input(type="hidden", name="redirect_key", value=redirect.key)
                 button.btn.btn-default.btn-block.remove-button Remove
         tr
           form(action="/admin/redirect/create", method="POST")
+            input(type="hidden", name="_csrf", value=token)
             td.col-sm-2
               input.form-control(name="redirect_key", placeholder="Redirect Name")
             td.col-sm-7

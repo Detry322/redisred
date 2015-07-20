@@ -14,7 +14,7 @@ module.exports = function(passport, adminController) {
     if (req.isAuthenticated())
       res.redirect('/admin/redirects');
     else
-      res.render('admin/root');
+      res.render('admin/root', { token: req.csrfToken() });
   });
 
   router.post('/login', passport.authenticate('local', {
