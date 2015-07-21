@@ -13,27 +13,31 @@ var authentication = require('./authentication');
 var express = require('express');
 var expressSession = require('express-session');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var Redis = require('ioredis');
 var passport = require('passport');
 var favicon = require('serve-favicon');
 var csrf = require('csurf');
+var RedisStore = require('connect-redis')(expressSession);
 
 //Initialize auth
 authentication(passport, adminUsername, adminPassword);
 
+//Connect to Redis
+var redis = new Redis(redisUrl);
+
 //Initialize the app
 var app = express();
+var redisSessionStore = new RedisStore({client: redis});
 app.set('views', './views');
 app.set('view engine', 'jade');
 app.use(favicon('./public/assets/favicon.png'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressSession({ secret: sessionSecret, resave: true, saveUninitialized: true }));
+app.use(cookieParser());
+app.use(expressSession({ store: redisSessionStore, secret: sessionSecret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(csrf());
-
-//Connect to Redis
-var redis = new Redis(redisUrl);
+app.use(csrf({ cookie: true }));
 
 //Initialize controllers
 var adminController = require('./controllers/AdminController')(redis);
