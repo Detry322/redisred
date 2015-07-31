@@ -19,14 +19,58 @@
         margin-top: 10px;
         font-size: 0.2em;
       }
+      .link-example {
+        margin: 5px;
+        margin-bottom: 10px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>red<span>is</span>red<small>A small, redis-based URL Redirector</small></h1>
-      <a href="https://www.heroku.com/deploy/?template=https://github.com/Detry322/redisred">
-        <img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy">
-      </a>
+      <h3>Description</h3>
+      <hr />
+      <p>
+        redisred is a extremely simple, dumb URL redirector. It lets you turn a link like this:
+        <div class="link-example">
+          <a href="http://2.bp.blogspot.com/-TwuKgh-bJO8/T9EfubfSyZI/AAAAAAAAC2I/FSaTSfqrXhk/s400/cat-playing-guitar-gif.gif">http://2.bp.blogspot.com/-TwuKgh-bJO8/T9EfubfSyZI/AAAAAAAAC2I/FSaTSfqrXhk/s400/cat-playing-guitar-gif.gif</a>
+        </div>
+        into a link like this:
+        <div class="link-example">
+          <a href="http://go.jackserrino.com/funnycat">http://go.jackserrino.com/funnycat</a>
+        </div>
+      </p>
+      <h3>Who uses this?</h3>
+      <hr />
+      <p>
+        <ul>
+          <li>HackMIT - <a href="https://go.hackmit.org/">https://go.hackmit.org/</a></li>
+          <li>Jack Serrino (Me) - <a href="http://go.jackserrino.com/">http://go.jackserrino.com/</a></li>
+        </ul>
+      </p>
+      <h3>Give me a try!</h3>
+      <hr />
+      <p>
+        Log into the admin portal here: <a href="http://redisred.herokuapp.com/admin">http://redisred.herokuapp.com/admin</a><br />
+        <ul>
+          <li>Username: admin</li>
+          <li>Password: testing</li>
+        </ul>
+        Go ahead and make your own redirects to test it out!
+      </p>
+      <h3>Use case</h3>
+      <hr />
+      <p>
+        Although this is an extraordinarily simple tool, it has a powerful use-case within a group or company. Many times, people need to share links to documents, agendas, images, etc. and want to be able to get to them quickly. redisred provides a tool in which people can create memorable links for frequently access pages on the web.
+      </p>
+      <p>
+        redisred is also useful for sending links to people externally, since it lets you link external resources to your internal branding. Need to send out a Google form to someone outside your group? Instead of sending the ugly google link, shorten it with redisred and link them into your site.
+      </p>
+      <h3>Buttons</h3>
+      <hr />
+      <p>
+        <a href="https://github.com/Detry322/redisred" class="btn btn-default">View on Github</a> <a href="https://www.heroku.com/deploy/?template=https://github.com/Detry322/redisred" class="btn btn-info">Deploy to Heroku</a>
+      </p><br />
     </div>
   </body>
 </html>
