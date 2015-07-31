@@ -45,7 +45,7 @@ To deploy this to heroku, click this fancy button :)
 
 | Variable | Description |
 | -------- | ----------- |
-| PORT | The port th
+| PORT | The port this app should run on |
 | ADMIN_USERNAME | The username used to log into the admin console |
 | ADMIN_PASSWORD | The password used to log into the admin console |
 | ROOT_REDIRECT | The URL the root of your website should redirect to |
