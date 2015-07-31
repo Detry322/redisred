@@ -1,0 +1,31 @@
+{
+  "name": "Redisred",
+  "description": "A Simple, Lightweight URL Redirector.",
+  "website": "http://jackserrino.com/redisred/",
+  "repository": "https://github.com/heroku/node-js-sample",
+  "logo": "https://jackserrino.com/redisred/logo.png",
+  "success_url": "/admin",
+  "keywords": [
+    "node",
+    "express",
+    "redis"
+  ],
+  "env": {
+    "ADMIN_USERNAME": {
+      "description": "The username used to log into the admin console"
+    },
+    "ADMIN_PASSWORD": {
+      "description": "The password used to log into the admin console"
+    },
+    "ROOT_REDIRECT": {
+      "description": "The URL the root of your website should redirect to."
+    },
+    "SESSION_SECRET": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    }
+  },
+  "addons": [
+    "heroku-redis"
+  ]
+}
