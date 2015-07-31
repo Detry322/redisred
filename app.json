@@ -12,10 +12,10 @@
   ],
   "env": {
     "ADMIN_USERNAME": {
-      "description": "The username used to log into the admin console"
+      "description": "The username used to log into the admin console."
     },
     "ADMIN_PASSWORD": {
-      "description": "The password used to log into the admin console"
+      "description": "The password used to log into the admin console."
     },
     "ROOT_REDIRECT": {
       "description": "The URL the root of your website should redirect to."
