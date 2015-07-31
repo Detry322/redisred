@@ -4,15 +4,22 @@ A small Redis-based URL Redirector
 
 [<img src="https://www.herokucdn.com/deploy/button.png">](https://www.heroku.com/deploy/?template=https://github.com/Detry322/redisred)
 
+## Give it a test!
+
+If you want to test it out first hand, try it here: [https://redisred.herokuapp.com/admin](https://redisred.herokuapp.com/admin)
+
+Username: `admin`
+Password: `testing`
+
 ## Features
 
-### Random Visitors:
+### Randos
 
 - Visitors can go to `/whatever`, and they'll be redirected to link named `whatever`
 - If the link doesn't exist, they'll be presented with a nice 404 page :)
 - Visiting just `/` brings you to a designated root redirect.
 
-### Admins:
+### Admins
 
 - `/admin` brings people to page where they can sign in
 - `/admin/redirects` lets people view and edit all of the redirects
@@ -50,3 +57,8 @@ To deploy this to heroku, click this fancy button :)
 | ADMIN_PASSWORD | The password used to log into the admin console |
 | ROOT_REDIRECT | The URL the root of your website should redirect to |
 | SESSION_SECRET | A secret key for verifying the integrity of signed cookies |
+
+
+## License
+
+Redisred is released under the MIT license.
