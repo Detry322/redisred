@@ -24,6 +24,14 @@ Password: `testing`
 - `/admin` brings people to page where they can sign in
 - `/admin/redirects` lets people view and edit all of the redirects
 
+### API
+
+All requests must be authenticated with a `x-access-token` header.
+
+- `GET /admin/api/` returns a json of all the redirects
+- `POST /admin/api/create` creates a redirect with parameters `key` and `url`
+- `POST /admin/api/delete` deletes a redirect with parameter `key`
+
 ## How to get up and running
 
 Some quick easy steps:
@@ -55,6 +63,7 @@ To deploy this to heroku, click this fancy button :)
 | PORT | The port this app should run on |
 | ADMIN_USERNAME | The username used to log into the admin console |
 | ADMIN_PASSWORD | The password used to log into the admin console |
+| API_TOKEN | The token to be used on all API calls |
 | ROOT_REDIRECT | The URL the root of your website should redirect to |
 | SESSION_SECRET | A secret key for verifying the integrity of signed cookies |
 

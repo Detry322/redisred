@@ -17,6 +17,9 @@
     "ADMIN_PASSWORD": {
       "description": "The password used to log into the admin console."
     },
+    "API_TOKEN": {
+      "description": "The token to be used on all API calls"
+    },
     "ROOT_REDIRECT": {
       "description": "The URL the root of your website should redirect to."
     },

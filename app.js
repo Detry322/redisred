@@ -7,6 +7,7 @@ var sessionSecret = process.env.SESSION_SECRET || 'this is really secure';
 var adminUsername = process.env.ADMIN_USERNAME || 'admin';
 var adminPassword = process.env.ADMIN_PASSWORD || '123456';
 var rootRedirect = process.env.ROOT_REDIRECT || 'https://google.com';
+var apiToken = process.env.API_TOKEN || '1234567890abcdefghijklmnopqrstuvwxyz';
 
 //Includes
 var authentication = require('./authentication');
@@ -17,7 +18,6 @@ var cookieParser = require('cookie-parser');
 var Redis = require('ioredis');
 var passport = require('passport');
 var favicon = require('serve-favicon');
-var csrf = require('csurf');
 var RedisStore = require('connect-redis')(expressSession);
 
 //Initialize auth
@@ -37,14 +37,14 @@ app.use(cookieParser());
 app.use(expressSession({ store: redisSessionStore, secret: sessionSecret, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(csrf({ cookie: true }));
 
 //Initialize controllers
-var adminController = require('./controllers/AdminController')(redis);
+var frontendController = require('./controllers/admin/FrontendController')(redis, passport);
+var apiController = require('./controllers/admin/APIController')(redis, apiToken);
 var redirectController = require('./controllers/RedirectController')(redis);
 
 //Initialize routes
-var admin = require('./routes/admin.js')(passport, adminController);
+var admin = require('./routes/admin.js')(frontendController, apiController);
 app.use('/admin', admin);
 var main = require('./routes/main.js')(rootRedirect, redirectController);
 app.use('/', main);
@@ -54,8 +54,10 @@ app.use(function(req, res, next) {
 
 // Start the server
 console.log('Connecting to redis...');
-redis.ping(function(){
-  console.log('Connection successful. Server listening on port ' + port);
-  app.listen(port);
+redis.ping(function(err){
+  if (!err) {
+    console.log('Connection successful. Server listening on port ' + port);
+    app.listen(port);
+  }
 });
 

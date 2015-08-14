@@ -80,6 +80,11 @@ module.exports = function(redis) {
           var key = baseKey(keys[i], urlKeyPrefix);
           resultArray.push(redisResponseToObject(key, results[2*i], results[2*i+1]));
         }
+        resultArray.sort(function(a,b){
+          var a_key = a.key.toLowerCase();
+          var b_key = b.key.toLowerCase();
+          return a_key.localeCompare(b_key);
+        });
         callback(false, resultArray);
       });
     });

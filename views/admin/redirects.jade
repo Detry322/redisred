@@ -21,15 +21,15 @@ html
             form(action="/admin/redirect/delete", method="POST")
               td.col-sm-2(colspan=2)
                 input(type="hidden", name="_csrf", value=token)
-                input(type="hidden", name="redirect_key", value=redirect.key)
+                input(type="hidden", name="key", value=redirect.key)
                 button.btn.btn-default.btn-block.remove-button Remove
         tr
           form(action="/admin/redirect/create", method="POST")
             input(type="hidden", name="_csrf", value=token)
             td.col-sm-2
-              input.form-control(name="redirect_key", placeholder="Redirect Name")
+              input.form-control(name="key", placeholder="Redirect Name")
             td.col-sm-7
-              input.form-control(name="redirect_url", placeholder="https://")
+              input.form-control(name="url", placeholder="https://")
             td.col-sm-1 N/A
             td.col-sm-2(colspan=2)
               button.btn.btn-danger.btn-block Create / Update

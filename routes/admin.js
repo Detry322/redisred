@@ -1,37 +1,25 @@
 var express = require('express');
+var csrf = require('csurf');
 
-var isAuthenticated = function(req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-  else
-    res.status(404).render('404');
-};
+module.exports = function(frontend, api) {
 
-module.exports = function(passport, adminController) {
+  var apiRouter = express.Router();
+  apiRouter.get('/', api.authenticate, api.getAllRedirects);
+  apiRouter.post('/create', api.authenticate, api.createRedirect);
+  apiRouter.post('/delete', api.authenticate, api.deleteRedirect);
+
+  var csrfProtection = csrf({ cookie: true });
+  var frontendRouter = express.Router();
+  frontendRouter.get('/', frontend.showLogin);
+  frontendRouter.post('/login', frontend.login);
+  frontendRouter.get('/logout', frontend.logout);
+  frontendRouter.get('/redirects', csrfProtection, frontend.authenticate, frontend.getAllRedirects);
+  frontendRouter.post('/redirect/create', csrfProtection, frontend.authenticate, frontend.createRedirect);
+  frontendRouter.post('/redirect/delete', csrfProtection, frontend.authenticate, frontend.deleteRedirect);
+
   var router = express.Router();
-
-  router.get('/', function(req, res) {
-    if (req.isAuthenticated())
-      res.redirect('/admin/redirects');
-    else
-      res.render('admin/root', { token: req.csrfToken() });
-  });
-
-  router.post('/login', passport.authenticate('local', {
-    successRedirect: '/admin/redirects',
-    failureRedirect: '/admin#incorrect'
-  }));
-
-  router.get('/logout', function(req, res) {
-    req.session.destroy(function (err) {
-      res.redirect('/admin');
-    });
-  });
-
-  router.get('/redirects', isAuthenticated, adminController.getAllRedirects);
-  router.post('/redirect/create', isAuthenticated, adminController.createRedirect);
-  router.post('/redirect/delete', isAuthenticated, adminController.deleteRedirect);
-
+  router.use('/api', apiRouter);
+  router.use('/', frontendRouter);
   router.get('*',function(req, res) {
     res.redirect('/admin');
   });
