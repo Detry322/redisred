@@ -1,4 +1,4 @@
-<img src="http://jackserrino.com/redisred/logo.png" />
+<img src="http://jack.plus/redisred/logo.png" />
 
 A small Redis-based URL Redirector
 
