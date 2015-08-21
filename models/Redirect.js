@@ -26,6 +26,7 @@ module.exports = function(redis) {
   var Redirect = {};
 
   Redirect.get = function(key, callback) {
+    key = key.toLowerCase();
     redis.multi({ pipeline: false });
     redis.get(urlKeyPrefix+key);
     redis.get(clicksKeyPrefix+key);
@@ -38,6 +39,7 @@ module.exports = function(redis) {
   };
 
   Redirect.create = function(key, url, callback) {
+    key = key.toLowerCase();
     redis.multi({ pipeline: false });
     redis.set(urlKeyPrefix+key, url);
     redis.set(clicksKeyPrefix+key, 0);
@@ -51,6 +53,7 @@ module.exports = function(redis) {
   };
 
   Redirect.delete = function(key, callback) {
+    key = key.toLowerCase();
     redis.del(urlKeyPrefix+key, clicksKeyPrefix+key, function(err, result) {
       if (err) {
         callback(err);
@@ -81,9 +84,7 @@ module.exports = function(redis) {
           resultArray.push(redisResponseToObject(key, results[2*i], results[2*i+1]));
         }
         resultArray.sort(function(a,b){
-          var a_key = a.key.toLowerCase();
-          var b_key = b.key.toLowerCase();
-          return a_key.localeCompare(b_key);
+          return a.key.localeCompare(b.key);
         });
         callback(false, resultArray);
       });
