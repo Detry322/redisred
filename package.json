@@ -7,7 +7,9 @@
     "start-redis": "redis-server > /dev/null & echo $! > redis.pid",
     "stop-redis": "kill -TERM $(cat redis.pid) && rm redis.pid",
     "create-config": "cp .env.config .env",
-    "start": "node app.js"
+    "start": "node app.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,7 @@
   "homepage": "https://github.com/Detry322/redisred",
   "dependencies": {
     "body-parser": "^1.13.2",
-    "connect-redis": "^2.4.0",
+    "connect-redis": "^3.0.0",
     "cookie-parser": "^1.3.5",
     "csurf": "^1.8.3",
     "dotenv": "^1.2.0",
@@ -38,6 +40,8 @@
     "morgan": "^1.6.1",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
-    "serve-favicon": "^2.3.0"
-  }
+    "serve-favicon": "^2.3.0",
+    "snyk": "^1.22.1"
+  },
+  "snyk": true
 }
