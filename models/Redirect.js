@@ -26,7 +26,7 @@ module.exports = function(redis) {
   var Redirect = {};
 
   Redirect.get = function(key, callback) {
-    key = key.toLowerCase();
+    key = decodeURIComponent(key.toLowerCase()).replace(/[^a-z0-9_]/g,'-');
     redis.multi({ pipeline: false });
     redis.get(urlKeyPrefix+key);
     redis.get(clicksKeyPrefix+key);
@@ -39,7 +39,7 @@ module.exports = function(redis) {
   };
 
   Redirect.create = function(key, url, callback) {
-    key = key.toLowerCase();
+    key = decodeURIComponent(key.toLowerCase()).replace(/[^a-z0-9_]/g,'-');
     redis.multi({ pipeline: false });
     redis.set(urlKeyPrefix+key, url);
     redis.set(clicksKeyPrefix+key, 0);
@@ -53,7 +53,7 @@ module.exports = function(redis) {
   };
 
   Redirect.delete = function(key, callback) {
-    key = key.toLowerCase();
+    key = decodeURIComponent(key.toLowerCase()).replace(/[^a-z0-9_]/g,'-');
     redis.del(urlKeyPrefix+key, clicksKeyPrefix+key, function(err, result) {
       if (err) {
         callback(err);
