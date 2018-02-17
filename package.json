@@ -35,7 +35,7 @@
     "express": "^4.13.1",
     "express-session": "^1.11.3",
     "hiredis": "^0.4.0",
-    "ioredis": "^1.5.11",
+    "ioredis": "^2.0.0",
     "jade": "^1.11.0",
     "morgan": "^1.6.1",
     "passport": "^0.2.2",
