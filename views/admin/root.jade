@@ -8,13 +8,7 @@ html
       h1(style="text-align: center; font-size: 4em;") redisred admin
       div.content
         form(action="/admin/login", method="POST")
-          div.form-group
-            label(for="username") Username
-            input.form-control(id="username", name="username", placeholder="Username")
-          div.form-group
-            label(for="password") Password
-            input.form-control(id="password", name="password", type="password", placeholder="Password")
-          button.btn.btn-danger.btn-block Log in
+          button.btn.btn-danger.btn-block Log in with Google
           #alert.alert.alert-danger(style="margin-top: 10px; display: none;") Wrong username or password.
           script if (window.location.hash.length) document.getElementById("alert").style.display = "block";
 
