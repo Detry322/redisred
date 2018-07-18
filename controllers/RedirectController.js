@@ -4,7 +4,7 @@ module.exports = function(redis) {
   var RedirectController = {};
 
   RedirectController.redirect = function(req, res) {
-    var redirectName = req.params.redirect_name;
+    var redirectName = req.params[0];
     Redirect.get(redirectName, function(err, redirect) {
       if (err)
         res.status(500).send(err);

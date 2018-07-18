@@ -5,6 +5,6 @@ module.exports = function(rootRedirect, redirectController) {
   router.get('/', function(req, res) {
   	res.redirect(rootRedirect);
   })
-  router.get('/:redirect_name', redirectController.redirect);
+  router.get('/*', redirectController.redirect);
   return router;
 };
