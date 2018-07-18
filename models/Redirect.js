@@ -53,7 +53,7 @@ module.exports = function(redis) {
   };
 
   Redirect.delete = function(key, callback) {
-    key = decodeURIComponent(key.toLowerCase()).replace(/[^a-z0-9_]/g,'-');
+    key = decodeURIComponent(key.toLowerCase()).replace(/[^a-z0-9_\/]/g,'-');
     redis.del(urlKeyPrefix+key, clicksKeyPrefix+key, function(err, result) {
       if (err) {
         callback(err);
