@@ -4,8 +4,8 @@ require('dotenv').load();
 var port = process.env.PORT || 3000;
 var redisUrl = process.env.REDIS_URL || 'redis://127.0.0.1:6379/0';
 var sessionSecret = process.env.SESSION_SECRET || 'this is really secure';
-var adminUsername = process.env.ADMIN_USERNAME || 'admin';
-var adminPassword = process.env.ADMIN_PASSWORD || '123456';
+var clientId = process.env.OAUTH2_PROXY_CLIENT_ID || 'we need a client id';
+var clientSecret = process.env.OAUTH2_PROXY_CLIENT_SECRET || 'and a client secret too';
 var rootRedirect = process.env.ROOT_REDIRECT || 'https://google.com';
 var apiToken = process.env.API_TOKEN || '1234567890abcdefghijklmnopqrstuvwxyz';
 
@@ -20,7 +20,7 @@ var favicon = require('serve-favicon');
 var RedisStore = require('connect-redis')(expressSession);
 
 //Initialize auth
-authentication(passport, adminUsername, adminPassword);
+authentication(passport, clientId, clientSecret);
 
 //Connect to Redis
 var redis = new Redis(redisUrl);

@@ -18,10 +18,14 @@ module.exports = function(redis, passport) {
       res.render('admin/root');
   };
 
-  FrontendController.login = passport.authenticate('local', {
-    successRedirect: '/admin/redirects',
-    failureRedirect: '/admin#incorrect'
-  });
+  FrontendController.login = passport.authenticate('google',
+    { scope: ['profile'] }
+);
+
+  FrontendController.loginCallback = passport.authenticate('google',
+    { successRedirect: '/admin/redirects',
+      failureRedirect: '/admin#incorrect' }
+  );
 
   FrontendController.logout = function(req, res) {
     req.session.destroy(function () {
