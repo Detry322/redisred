@@ -15,6 +15,7 @@ module.exports = function(frontend, api) {
   frontendRouter.use(bodyParser.urlencoded({ extended: false }));
   frontendRouter.get('/', frontend.showLogin);
   frontendRouter.post('/login', frontend.login);
+  frontendRouter.get('/login/callback', frontend.loginCallback);
   frontendRouter.get('/logout', frontend.logout);
   frontendRouter.get('/redirects', csrfProtection, frontend.authenticate, frontend.getAllRedirects);
   frontendRouter.post('/redirect/create', csrfProtection, frontend.authenticate, frontend.createRedirect);

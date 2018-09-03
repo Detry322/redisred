@@ -21,7 +21,7 @@ Password: `testing`
 
 ### Admins
 
-- `/admin` brings people to page where they can sign in
+- `/admin` brings people to page where they can sign in with Google OAuth
 - `/admin/redirects` lets people view and edit all of the redirects
 
 ### API
@@ -61,8 +61,8 @@ To deploy this to heroku, click this fancy button :)
 | Variable | Description |
 | -------- | ----------- |
 | PORT | The port this app should run on |
-| ADMIN_USERNAME | The username used to log into the admin console |
-| ADMIN_PASSWORD | The password used to log into the admin console |
+| OAUTH2_PROXY_CLIENT_ID | The client ID of your Google app |
+| OAUTH2_PROXY_CLIENT_SECRET | The client secret of your Google app |
 | API_TOKEN | The token to be used on all API calls |
 | ROOT_REDIRECT | The URL the root of your website should redirect to |
 | SESSION_SECRET | A secret key for verifying the integrity of signed cookies |
